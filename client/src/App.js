@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import ComponentServices from './ComponentServices';
 import CheckboxComponent from './checkBoxComponent';
+import MergeChangesComponent from './MergeChanges';
+import ChatComponent from './chatComponent';
 
 class App extends Component {
   componentService = new ComponentServices();
@@ -11,6 +13,8 @@ class App extends Component {
     this.state = {
       editorContent: "Pleace specify the file's to load",
       loadContent: '',
+      comment:'',
+      comments:["a","b"],
       file1Content: "",
       file2Content: "",
       enableSaveButton: false,
@@ -23,7 +27,7 @@ class App extends Component {
       alignmentCss: "col-md-12",
       alignmentCssFile1: " ",
       alignmentCssFile2: " ",
-      showFile: "display-none",
+      showFile: "",
       showFile1: "display-none",
       showFile2: "display-none",
       rowView: true,
@@ -65,6 +69,7 @@ class App extends Component {
     file2.onloadend = (e) => { this.state.file2 = e.target.result; }
     let result = this.componentService.uploadFile(this.refs.customFile1.files[0], this.refs.customFile2.files[0], this.state.compareCondition);
     result.then((data) => {
+      state.comments=data["thankyou"].split("\n");
       let content = data["thankyou"].toString().replace(new RegExp(this.replaceAll("#ifndef  --LTYPE"), 'g'), "*********************************************************File1-Start***************************************************")
       content = content.replace(new RegExp(this.replaceAll("#else /*  --LTYPE */"), 'g'), "=============================File1-End======File2-Start=========================")
       content = content.replace(new RegExp(this.replaceAll("#endif /*  --LTYPE */"), 'g'), "*********************************************************File2-END***************************************************");
@@ -101,6 +106,15 @@ class App extends Component {
     currentReference.setState(state);
   }
 
+  clear(event){
+    this.state.editorContent="";
+    this.setState(this.state);
+  }
+
+  invisticate(a,b,c){
+  console.log(a,b,c)
+  }
+
   CheckBoxChange(currentReference, state, event) {
     if (event.currentTarget.checked)
       state.displayCount++;
@@ -132,6 +146,7 @@ class App extends Component {
         <textarea ref="file1" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" className={" bg-dark  text-white text-nowrap form-inline " + this.state.alignmentCssFile1 + " " + this.state.showFile1} style={{ height: "500px" }} value={this.state.file1}></textarea>
         <textarea ref="file1" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" className={" bg-dark text-white text-nowrap form-inline " + this.state.alignmentCssFile2 + " " + this.state.showFile2} style={{ height: "500px" }} value={this.state.file2}></textarea>
       </div>
+      <MergeChangesComponent comment={this.state.comments} parentScope={this} method={this.invisticate} file1={this.state.file1}></MergeChangesComponent>
       <form className="form-group paddingTop-1" >
         <div className="custom-file col-md-3">
           <input type="file" className="form-control form-control-file border btn-sm" onChange={this.fileNameChanged.bind(this)} ref="customFile1" id="customFile1" />
@@ -140,6 +155,7 @@ class App extends Component {
           <input type="file" className="form-control form-control-file border btn-sm" onChange={this.fileNameChanged.bind(this)} ref="customFile2" id="customFile2" />
         </div>
         <input type="button" onClick={this.loadDifference.bind(this)} className="btn btn-primary btn-sm marginLeft-2" disabled={!this.state.enableLoadButton} value="Load" />
+        <input type="button" onClick={this.clear.bind(this)} className="btn btn-primary btn-sm marginLeft-2" value="Clear" />
         <CheckboxComponent currentReference={this} conditionCheckBoxChange={this.conditionCheckBoxChange} state={this.state} CheckBoxChange={this.CheckBoxChange} show={this.state.showRadio} />
         <div style={{ "paddingTop": "10px" }}>
           <label className="form-control-label text-weight-bold text-primary" style={{ "paddingRight": "8px", "paddingLeft": "16px" }} htmlFor="save-fila-name">Enter File Name </label>
@@ -147,6 +163,7 @@ class App extends Component {
           <input type="button" onClick={this.saveDocument.bind(this)} style={{ "marginBottom": "4px", "marginLeft": "20px" }} disabled={!this.state.enableSaveButton} className="btn btn-primary btn-sm" value="Download"></input>
         </div>
       </form>
+      <ChatComponent></ChatComponent>
     </div>);
   }
 }

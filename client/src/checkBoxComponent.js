@@ -11,7 +11,7 @@ export default class CheckboxComponent extends Component {
 
     render() {
             return (<div className="paddingTop-1">
-                <div className="custom-control custom-radio custom-control-inline">
+                <div className="custom-control custom-radio custom-control-inline col">
                     <div className="text-info">Set compare Conditions</div>
                     <div className="custom-control custom-radio custom-control-inline paddingLeft-1">
                         <input type="radio" onChange={this.conditionCheckBoxChange.bind(this)} defaultChecked id="file-c8-checkbox" className="custom-control-input" value="-D --LTYPE"  name="condition" ></input>
@@ -21,27 +21,27 @@ export default class CheckboxComponent extends Component {
                         <input type="radio" onChange={this.conditionCheckBoxChange.bind(this)} id="file-c1-checkbox" className="custom-control-input" value="-i" name="condition" ></input>
                         <label className="custom-control-label" htmlFor="file-c1-checkbox">Ignore Case</label>
                     </div>
-                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1">
+                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1 display-none">
                         <input type="radio" onChange={this.conditionCheckBoxChange.bind(this)} id="file-c2-checkbox" className="custom-control-input" value="-E"  name="condition"></input>
                         <label className="custom-control-label" htmlFor="file-c2-checkbox">Ignore changes due to tab expansion</label>
                     </div>
-                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1">
+                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1 ">
                         <input type="radio" onChange={this.conditionCheckBoxChange.bind(this)} id="file-c3-checkbox" className="custom-control-input" value="-y"  name="condition"></input>
                         <label className="custom-control-label" htmlFor="file-c3-checkbox">Output in two columns</label>
                     </div>
-                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1">
+                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1 display-none">
                         <input type="radio" onChange={this.conditionCheckBoxChange.bind(this)} id="file-c4-checkbox" className="custom-control-input" value="-Z"  name="condition"></input>
                         <label className="custom-control-label" htmlFor="file-c4-checkbox">Ignore white space at line end</label>
                     </div>
-                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1">
+                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1 display-none">
                         <input type="radio" onChange={this.conditionCheckBoxChange.bind(this)} id="file-c5-checkbox" className="custom-control-input" value="-b"  name="condition"></input>
                         <label className="custom-control-label" htmlFor="file-c5-checkbox">Ignore changes in the amount of white space</label>
                     </div>
-                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1">
+                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1 ">
                         <input type="radio" onChange={this.conditionCheckBoxChange.bind(this)} id="file-c6-checkbox" className="custom-control-input" value="-w"  name="condition"></input>
                         <label className="custom-control-label" htmlFor="file-c6-checkbox">Ignore all white space</label>
                     </div>
-                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1">
+                    <div className="custom-control custom-radio custom-control-inline paddingLeft-1 display-none">
                         <input type="radio" onChange={this.conditionCheckBoxChange.bind(this)} id="file-c7-checkbox" className="custom-control-input" value="-B"  name="condition"></input>
                         <label className="custom-control-label" htmlFor="file-c7-checkbox">Ignore changes where lines are all blank</label>
                     </div>
